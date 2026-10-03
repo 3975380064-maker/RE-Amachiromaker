@@ -998,3 +998,14 @@ html {
     to { transform: translateY(-50%) rotate(2deg); }
   }
 }
+
+/* 深色模式下为缩略图提供浅色衬底
+   贴图/标签缩略图是透明背景的 PNG，深色模式下容器背景为深色，
+   深色线条图案会与背景融为一体而不可见；加浅色底后两种主题下都清晰 */
+[data-theme='dark'] .item-image,
+[data-theme='dark'] .item-image-selected,
+[data-theme='dark'] .tab-image,
+[data-theme='dark'] .color-image,
+[data-theme='dark'] .color-image-selected {
+  background-color: #eef0f4;
+}
