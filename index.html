@@ -5,10 +5,10 @@
   <!-- 修改图标路径 -->
   <link rel="icon" href="./favicon.png"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="theme-color" content="#000000"/>
-  <meta name="description" content="Web site created using create-react-app"/>
+  <meta name="theme-color" content="#fff5f8"/>
+  <meta name="description" content="RE:Amachiromaker，复活被甘城猫猫下线的捏脸网站"/>
   <!-- 修改苹果图标路径 -->
-  <link rel="apple-touch-icon" href="./icon_x9xMHja1yr84uqqE.png"/>
+  <link rel="apple-touch-icon" href="./favicon.png"/>
   <!-- 修改 manifest 路径 -->
   <link rel="manifest" href="./manifest.json"/>
   <title>amachiromaker</title>
@@ -69,7 +69,6 @@
   <script src="./static/js/2.78bd1ab9.chunk.js"></script>
   <script src="./static/js/main.72370a41.chunk.js"></script>
   <script src="./static/js/modal.js"></script>
-</body>
 <script>
 document.addEventListener('contextmenu', e => e.preventDefault());
 // 添加猫猫气泡对话功能w
@@ -117,16 +116,25 @@ document.querySelector('.author-neko').addEventListener('click', function(e) {
   bubble.style.color = '#fdeeff';
   bubble.style.fontSize = '14px';
   bubble.style.fontWeight = '500';
-  bubble.style.whiteSpace = 'nowrap';
+  bubble.style.whiteSpace = 'normal';
+  bubble.style.maxWidth = 'min(240px, calc(100vw - 24px))';
+  bubble.style.boxSizing = 'border-box';
+  bubble.style.overflowWrap = 'break-word';
   bubble.style.animation = 'bubbleAppear 0.3s ease-out';
   
   const rect = this.getBoundingClientRect();
   // 修改后..好累喵
   bubble.style.top = `${rect.top + window.scrollY - 100}px`;
-  bubble.style.left = `${rect.left + window.scrollX + rect.width/2 - 50}px`;
   
   bubble.textContent = nekoMessages[Math.floor(Math.random() * nekoMessages.length)];
   document.body.appendChild(bubble);
+  
+  // 挂载后再测量宽度，将气泡的水平位置钳制在视口内，避免长文案溢出屏幕
+  const bubbleWidth = bubble.offsetWidth;
+  const centeredLeft = rect.left + window.scrollX + rect.width/2 - bubbleWidth/2;
+  const minLeft = window.scrollX + 8;
+  const maxLeft = window.scrollX + window.innerWidth - bubbleWidth - 8;
+  bubble.style.left = `${Math.max(minLeft, Math.min(centeredLeft, maxLeft))}px`;
   
   isBubbleActive = true;
 setTimeout(() => {
@@ -187,8 +195,10 @@ themeToggleBtn.addEventListener('click', () => {
 });
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-  const newTheme = e.matches ? 'dark' : 'light';
-  setTheme(newTheme);
+  // 用户已手动选择过主题时，不跟随系统切换覆盖用户选择
+  if (localStorage.getItem('theme')) return;
+  setTheme(e.matches ? 'dark' : 'light');
 });
 </script>
+</body>
 </html>

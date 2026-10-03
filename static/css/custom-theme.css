@@ -835,6 +835,9 @@ a {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-delay: 0.01ms !important;
+    /* 必须同时限制迭代次数：否则 infinite 动画会以每帧上千次的速度循环，
+       表现为元素（如看板娘 .author-neko）剧烈抖动 */
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
