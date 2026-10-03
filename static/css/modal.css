@@ -1,17 +1,17 @@
+/* 使用须知弹窗，样式与 custom-theme.css 保持一致 */
+
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  z-index: 1000;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(7, 24, 40, 0.45);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 1000; /* 确保在最上层 */
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .modal-overlay.active {
@@ -20,79 +20,79 @@
 }
 
 .modal-content {
-  background: rgba(240, 244, 248, 0.521); /* 半透明浅蓝色背景 */
-  padding: 30px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 500px;
+  width: 100%;
+  max-width: 480px;
+  padding: 24px;
   text-align: center;
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-  border: 1px solid rgba(118, 170, 255, 0.801); /* 半透明边框 */
-  backdrop-filter: blur(10px); /* 模糊效果 */
+  color: var(--text-color, #071828);
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--card-border, #cce2f1);
+  border-radius: 16px;
+  box-shadow: 0 4px 0 var(--shadow-hard, #cce2f1);
+  transform: translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.17, 0.67, 0, 1.85);
 }
 
 .modal-overlay.active .modal-content {
-  transform: scale(1);
+  transform: translateY(0);
 }
 
 .modal-content h2 {
-  margin-top: 0;
-  color: #333;
-  font-size: 24px;
-  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--accent-dark, #1464ae);
+  font-size: 1.15rem;
+  font-weight: 800;
 }
 
 .modal-content p {
-  margin: 20px 0;
-  color: #555; /* 深灰色字体 */
-  font-size: 16px;
-  line-height: 1.6;
+  margin: 12px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
 }
 
 .modal-content p strong {
-  color: #991641; /* 突出显示重要内容 */
+  color: var(--accent-dark, #1464ae);
 }
 
 .modal-buttons {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-top: 30px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .modal-button {
-  padding: 12px 25px;
+  appearance: none;
   border: none;
-  border-radius: 25px; /* 更圆的按钮 */
+  border-radius: 10px;
+  padding: 10px 22px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600; /* 字体加粗 */
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  text-transform: uppercase; /* 字母大写 */
-  letter-spacing: 1px; /* 增加字母间距 */
+  box-shadow: 0 4px 0 var(--shadow-hard, #cce2f1);
+  transition: transform 0.25s cubic-bezier(0.17, 0.67, 0, 1.85), background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .modal-button-agree {
-  background: linear-gradient(45deg, #44d661, #cfffdf); /* 绿色渐变 */
-  color: white;
+  background: var(--accent, #1abbde);
 }
 
 .modal-button-agree:hover {
-  background-color: #218838;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  background: var(--accent-hover, #46cbe8);
 }
 
 .modal-button-disagree {
-  background: linear-gradient(45deg, #ff487f, #e4e8f0); /* 粉色渐变w */
-  color: #ffffff;
+  background: var(--muted, #7a98c9);
 }
 
-.modal-button-disagree:hover {
-  background-color: #c82333;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+.modal-button:hover {
+  transform: translateY(-2px);
+}
+
+.modal-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--shadow-hard, #cce2f1);
 }
