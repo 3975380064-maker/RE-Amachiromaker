@@ -122,6 +122,7 @@ document.querySelector('.author-neko').addEventListener('click', function(e) {
   bubble.style.maxWidth = 'min(240px, calc(100vw - 24px))';
   bubble.style.boxSizing = 'border-box';
   bubble.style.overflowWrap = 'break-word';
+  bubble.style.zIndex = '2000';
   bubble.style.animation = 'bubbleAppear 0.3s ease-out';
   
   const rect = this.getBoundingClientRect();
